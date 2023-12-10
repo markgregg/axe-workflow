@@ -1,0 +1,96 @@
+.mainBody {
+  width: 80vw;
+  min-height: 90vh;
+  top: 5vh;
+  left: 10vw;
+  position: relative;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: smaller;
+}
+
+.mainSelection {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+}
+
+.mainTheme {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+}
+
+.mainOptions {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.mainToolBar {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+}
+
+.mainPhases {
+  display: flex;
+  flex-direction: row;
+  column-gap: 5px;
+  text-align: center;
+}
+
+.mainCommandBarDiv {
+  display: flex;
+  flex-direction: row;
+  column-gap: 5px;
+  padding: 5px;
+}
+
+.mainContentDiv {
+  display: flex;
+  flex-direction: column;
+  height: calc(90vh - 90px);
+  width: 100%;
+  overflow: hidden;
+}
+
+.mainConttentArea {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+
+.MainContentLeft {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 50%;
+}
+
+.MainContentRv {
+  display: flex;
+  height: calc(100% - 2px);
+  width: 50%;
+}
+
+.MainContentClients {
+  display: flex;
+  height: 30%;
+  width: 100%;
+}
+
+.MainContentBonds {
+  display: flex;
+  height: 35%;
+  width: 100%;
+}
+
+.mainContentActivity {
+  display: flex;
+  height: calc(35% - 2px);
+  width: 100%;
+}

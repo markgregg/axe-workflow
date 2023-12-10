@@ -1,0 +1,58 @@
+.clientInterestsMain {
+  height: calc(100% - 10px);
+  width: calc(100% - 10px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.agInterestsGrid {
+  max-height: 360px;
+  flex-grow: 1;
+}
+
+.ag-theme-alpine {
+  --ag-grid-size: 3px;
+  --ag-list-item-height: 20px;
+}
+
+.mainMultiselectHoldings {
+  flex-grow: 1;
+  padding: 5px;
+}
+
+.clientInterestViews {
+  display: flex;
+  flex-direction: row;
+  column-gap: 3px;
+  margin-bottom: 5px;
+}
+
+.clientInterestViewSelected {
+  border-top: 2px solid rgb(134, 133, 133);
+  border-left: 2px solid rgb(134, 133, 133);
+  border-bottom: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  margin-bottom: 5px;
+  width: 60px;
+  text-align: center;
+  user-select: none;
+  background-color: gainsboro;
+}
+
+.clientInterestVieUnSelected {
+  border-top: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+  border-bottom: 2px solid rgb(134, 133, 133);
+  border-right: 2px solid rgb(134, 133, 133);
+  margin-bottom: 5px;
+  width: 60px;
+  text-align: center;
+  user-select: none;
+  background-color: lightgray;
+}
+
+.clientInterestVieUnSelected:hover {
+  background-color: gainsboro;
+}

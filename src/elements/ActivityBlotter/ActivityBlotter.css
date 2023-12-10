@@ -1,0 +1,27 @@
+div.ag-theme-alpine div.ag-row {
+  font-size: x-small;
+}
+
+div.ag-theme-alpine ag-cell {
+  white-space: break-spaces;
+}
+
+.mainBlotter {
+  width: 100%;
+  height: 100%;
+  font-size: small;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.agGrid {
+  height: 250px;
+  width: 100%;
+  color: #16518d;
+}
+
+.mainMultiselectActivity {
+  flex-grow: 1;
+  padding: 5px;
+}

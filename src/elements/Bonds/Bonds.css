@@ -1,0 +1,45 @@
+div.ag-theme-alpine div.ag-row {
+  font-size: x-small;
+}
+
+.ag-header-cell-text {
+  font-size: x-small;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+div.ag-theme-alpine ag-cell {
+  white-space: break-spaces;
+}
+
+.mainBlotter {
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  font-size: small;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  overflow: hidden;
+}
+
+.agBondsGrid {
+  flex-grow: 1;
+  font-size: small;
+}
+
+.mainAxeBondToggle {
+  border-top: 1px solid lightgray;
+  border-left: 1px solid lightgray;
+  border-bottom: 2px solid rgb(134, 133, 133);
+  border-right: 2px solid rgb(134, 133, 133);
+  margin-bottom: 5px;
+  width: 120px;
+  text-align: center;
+  user-select: none;
+  background-color: lightgray;
+}
+
+.mainAxeBondToggle:hover {
+  background-color: gainsboro;
+}
