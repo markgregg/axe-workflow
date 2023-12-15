@@ -78,10 +78,6 @@ const Bonds = () => {
       })
   }, [isAxe])
 
-  React.useEffect(() => {
-    matchersChanged(context.matchers)
-  }, [context.matchers, matchersChanged])
-
   const handleSelection = (event: RowClickedEvent<Bond>) => {
     if (event.data?.isin && event.data?.side) {
       dispatch(setContext([
@@ -122,7 +118,7 @@ const Bonds = () => {
           rowData={rowData}
           rowSelection='single'
           rowMultiSelectWithClick={true}
-          onRowDoubleClicked={handleSelection}
+          onRowClicked={handleSelection}
           columnDefs={columnDefs}>
         </AgGridReact>
       </div>

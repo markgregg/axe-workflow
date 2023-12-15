@@ -3,17 +3,19 @@ import { IconType } from 'react-icons'
 import './Button.css'
 
 interface ButtonProps {
-  Icon: IconType
+  Icon?: IconType
+  text?: string
   onClick?: () => void
 }
 
-const Button: React.FC<ButtonProps> = ({ Icon, onClick }) => {
+const Button: React.FC<ButtonProps> = ({ Icon, text, onClick }) => {
   return (
     <div
       onClick={onClick}
       className='buttonMain'
     >
-      <Icon />
+      {Icon && <Icon />}
+      {text}
     </div>
   )
 }

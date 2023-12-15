@@ -66,7 +66,9 @@ export const styleFromTheme = (theme: string): MutliSelectStyles | undefined => 
   if (theme === 'metallic') {
     return metallicTheme
   }
-  return undefined
+  return {
+
+  }
 }
 
 export const getAgGridStyle = (theme: string): any => {
@@ -82,7 +84,9 @@ export const getAgGridStyle = (theme: string): any => {
       '--ag-row-border-color': 'rgb(91, 145, 180)'
     }
   }
-  return {}
+  return {
+    '--ag-header-background-color': 'white',
+  }
 }
 
 export const styleDivFromTheme = (theme: string): any => {

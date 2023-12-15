@@ -1,13 +1,31 @@
 import { Matcher } from 'multi-source-select'
 import Bond from './Bond'
-import { CellClassParams, CellStyle, CellStyleFunc } from 'ag-grid-community'
-import { ClientPicture } from '@/elements/ClientHoldings/ClientHoldings'
+import { CellClassParams, CellStyle, CellStyleFunc, ValueFormatterParams } from 'ag-grid-community'
+import { Insight } from '@/elements/ClientInsight/ClientInsight'
 
+
+export const asHypen = (params: ValueFormatterParams<any, any>) => {
+  if (!params.value || params.value === 0) {
+    return '-'
+  }
+  return params.value
+}
 
 export const buySellStyle: CellStyleFunc<Bond, any> = (params: CellClassParams<Bond, any>): CellStyle => {
   return {
-    backgroundColor: params.value === '' ? 'white' : params.value === 'BUY' ? '#0ea90e' : 'red',
+    backgroundColor: params.value === '' ? 'white' : params.value === 'BUY' ? 'rgb(6,104,178)' : 'orange',
     color: 'white'
+  }
+}
+
+export const buyStyle: CellStyleFunc<Insight, any> = (params: CellClassParams<Insight, any>): CellStyle => {
+  return {
+    color: 'rgb(6,104,178)'
+  }
+}
+export const sellStyle: CellStyleFunc<Insight, any> = (params: CellClassParams<Insight, any>): CellStyle => {
+  return {
+    color: 'orange'
   }
 }
 
@@ -18,13 +36,13 @@ export const graidentStyle: CellStyleFunc<any, any> = (params: CellClassParams<a
 }
 
 
-export const bidAskValueStyle: CellStyleFunc<ClientPicture, any> = (params: CellClassParams<ClientPicture, any>): CellStyle => {
+export const bidAskValueStyle: CellStyleFunc<Insight, any> = (params: CellClassParams<Insight, any>): CellStyle => {
   return {
-    color: params.value > 0 ? 'rgb(40, 243, 40)' : params.value < 0 ? 'red' : 'black'
+    color: params.value > 0 ? 'rgb(6,104,178)' : params.value < 0 ? 'orange' : 'black'
   }
 }
 
-export const currencyValueStyleMetallic: CellStyleFunc<ClientPicture, any> = (params: CellClassParams<ClientPicture, any>): CellStyle => {
+export const currencyValueStyleMetallic: CellStyleFunc<Insight, any> = (params: CellClassParams<Insight, any>): CellStyle => {
   return {
     color: params && params.value && params.value >= 0 ? '#d3d3d3' : 'red'
   }

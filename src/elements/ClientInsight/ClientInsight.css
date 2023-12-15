@@ -8,7 +8,6 @@
 }
 
 .agInterestsGrid {
-  max-height: 360px;
   flex-grow: 1;
 }
 
@@ -26,7 +25,8 @@
   display: flex;
   flex-direction: row;
   column-gap: 3px;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
+  align-items: center;
 }
 
 .clientInterestViewSelected {
@@ -55,4 +55,16 @@
 
 .clientInterestVieUnSelected:hover {
   background-color: gainsboro;
+}
+
+.clientInterestSmallText {
+  font-size: x-small;
+  margin-left: 4px;
+  user-select: none;
+}
+
+.clientInterestToggleGroup {
+  display: flex;
+  flex-direction: row;
+  column-gap: 4px;
 }

@@ -11,6 +11,43 @@
   font-size: smaller;
 }
 
+.mainTesBar {
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.mainTitleBar {
+  width: 100%;
+  display: flex;
+}
+
+.mainPerspective {
+  border-radius: 50px;
+  border-right: 3px solid black;
+  border-bottom: 3px solid black;
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  font-size: large;
+  padding: 8px;
+}
+
+.mainPerspective:hover {
+  background-color: rgb(255, 86, 86);
+}
+
+.mainTitle {
+  background: linear-gradient(90deg, rgba(255, 0, 0, 1) 0%, rgba(255, 255, 255, 1) 70%);
+  padding: 8px;
+  color: white;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: x-large;
+  padding-left: 30px;
+  flex-grow: 1;
+}
+
 .mainSelection {
   display: flex;
   flex-direction: row;
@@ -52,7 +89,7 @@
 .mainContentDiv {
   display: flex;
   flex-direction: column;
-  height: calc(90vh - 90px);
+  height: calc(100vh - 90px);
   width: 100%;
   overflow: hidden;
 }
@@ -60,37 +97,69 @@
 .mainConttentArea {
   display: flex;
   flex-direction: row;
-  height: 100%;
+  height: calc(100% - 120px);
   width: 100%;
 }
 
-.MainContentLeft {
+.mainContentLeft {
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 50%;
 }
 
-.MainContentRv {
+.mainContentRight {
   display: flex;
-  height: calc(100% - 2px);
+  flex-direction: column;
+  height: 100%;
   width: 50%;
+  overflow: hidden;
 }
 
-.MainContentClients {
+.mainContentClients {
   display: flex;
-  height: 30%;
+  height: 60%;
   width: 100%;
 }
 
-.MainContentBonds {
+.mainContentBonds {
   display: flex;
-  height: 35%;
+  height: 40%;
   width: 100%;
 }
 
 .mainContentActivity {
   display: flex;
-  height: calc(35% - 2px);
+  height: 35%;
+  width: 100%;
+}
+
+.mainContentRightTop {
+  display: flex;
+  height: 40%;
+  width: 100%;
+}
+
+.mainContentMktActivity {
+  display: flex;
+  height: 100%;
+  width: 50%;
+}
+
+.mainContentRV {
+  display: flex;
+  height: 100%;
+  width: 50%;
+}
+
+.mainContentActivity {
+  display: flex;
+  height: 35%;
+  width: 100%;
+}
+
+.mainContentRefPrice {
+  display: flex;
+  height: 35%;
   width: 100%;
 }
