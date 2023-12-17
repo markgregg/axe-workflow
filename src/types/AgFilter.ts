@@ -1,5 +1,4 @@
 import { Matcher } from 'multi-source-select'
-import Bond from './Bond'
 import { CellClassParams, CellStyle, CellStyleFunc, ValueFormatterParams } from 'ag-grid-community'
 import { Insight } from '@/elements/ClientInsight/ClientInsight'
 import Reference from './Reference'
@@ -19,24 +18,24 @@ export const buySellStyle: CellStyleFunc<any, any> = (params: CellClassParams<an
   }
 }
 
-export const buyStyle: CellStyleFunc<Insight, any> = (params: CellClassParams<Insight, any>): CellStyle => {
+export const buyStyle: CellStyleFunc<Insight, any> = (): CellStyle => {
   return {
     color: 'rgb(6,104,178)'
   }
 }
-export const sellStyle: CellStyleFunc<Insight, any> = (params: CellClassParams<Insight, any>): CellStyle => {
+export const sellStyle: CellStyleFunc<Insight, any> = (): CellStyle => {
   return {
     color: 'orange'
   }
 }
 
-export const refBuyStyle: CellStyleFunc<Reference, any> = (params: CellClassParams<Reference, any>): CellStyle => {
+export const refBuyStyle: CellStyleFunc<Reference, any> = (): CellStyle => {
   return {
     backgroundColor: 'rgb(136,226,18)'
   }
 }
 
-export const refSellStyle: CellStyleFunc<Reference, any> = (params: CellClassParams<Reference, any>): CellStyle => {
+export const refSellStyle: CellStyleFunc<Reference, any> = (): CellStyle => {
   return {
     backgroundColor: 'rgb(255,150,154)'
   }

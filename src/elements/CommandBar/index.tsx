@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { styleFromTheme } from "../../themes"
-import { DataSource, Matcher, SourceItem, defaultComparison, numberComparisons, stringComparisons } from 'multi-source-select'
+import { DataSource, Matcher, Nemonic, SourceItem, defaultComparison, numberComparisons, stringComparisons } from 'multi-source-select'
 import MultiSelect from 'multi-source-select'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { extractDate, getSize, isSize } from '../../utils'
@@ -12,17 +12,16 @@ import { Insight, clientInsightList } from '../ClientInsight/ClientInsight'
 import { setClient } from '../../store/ClientSlice'
 
 interface CommandBarProps {
-  onClientChanged: () => void
+  onClientChanged: (matcher?: Matcher[]) => void
 }
 
 const CommandBar: React.FC<CommandBarProps> = ({ onClientChanged }) => {
   const theme = useAppSelector((state) => state.theme.theme)
   const [bonds, setBonds] = React.useState<Bond[]>([])
   const [clients, setClients] = React.useState<Insight[]>([])
-  const divRef = React.useRef<HTMLDivElement | null>(null)
 
   const dispatch = useAppDispatch()
-  const context = useAppSelector((state) => state.context)
+  const client = useAppSelector((state) => state.selectedClient)
 
   const findItems = React.useCallback((text: string, field: 'isin' | 'currency' | 'issuer'): SourceItem[] => {
     const uniqueItems = new Set<string>()
@@ -55,6 +54,14 @@ const CommandBar: React.FC<CommandBarProps> = ({ onClientChanged }) => {
     }
     return items
   }, [clients])
+
+  const functions = React.useMemo<Nemonic[]>(() => [
+    {
+      name: 'Interest',
+      optionalDataSources: ['Coupon', 'Size', 'MaturityDate', 'CountryRegion', 'Sector', 'ISIN', 'Side']
+    },
+
+  ], [])
 
   const dataSource = React.useMemo<DataSource[]>(() => [
     {
@@ -284,8 +291,12 @@ const CommandBar: React.FC<CommandBarProps> = ({ onClientChanged }) => {
 
   const handleAction = (matchers: Matcher[], func?: string) => {
     if (func) {
-      //const valueMatchers = matchers.filter(matcher => matcher.source.toLowerCase() !== 'actions')
-      //onCommand(func, valueMatchers)
+      if (client.client) {
+        const valueMatchers = matchers.filter(matcher => matcher.source.toLowerCase() !== 'actions')
+        if (onClientChanged) {
+          onClientChanged(valueMatchers)
+        }
+      }
     } else {
       if (matchers.find(m => m.source === 'Client')) {
         const client = matchers.find(m => m.source === 'Client')?.text
@@ -294,13 +305,11 @@ const CommandBar: React.FC<CommandBarProps> = ({ onClientChanged }) => {
             onClientChanged()
           }
           dispatch(setClient(client))
-          divRef.current?.focus()
         }
       } else {
         const contextMatchers = matchers?.filter(m => m.source !== 'TradeDate' && m.source !== 'Client') ?? []
         if (matchers.length > 0) {
           dispatch(setContext(contextMatchers))
-          divRef.current?.focus()
         }
       }
     }
@@ -309,11 +318,11 @@ const CommandBar: React.FC<CommandBarProps> = ({ onClientChanged }) => {
   return (
     <div>
       <div
-        ref={divRef}
         className='mainMultiselectContainer'
       >
         <div className='mainMultiselect'>
           <MultiSelect
+            functions={functions}
             dataSources={dataSource}
             styles={styleFromTheme(theme)}
             showCategories={true}

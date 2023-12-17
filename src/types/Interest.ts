@@ -5,7 +5,7 @@ export default interface Interest {
   couponFrom?: number
   couponTo?: number
   industry?: string
-  side: 'BUY' | 'SELL'
+  side?: 'BUY' | 'SELL'
   size?: number
 }
 

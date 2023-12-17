@@ -14,7 +14,7 @@ div.ag-theme-alpine ag-cell {
 }
 
 .mainBlotter {
-  width: calc(100% - 10px);
+  width: calc(100% - 20px);
   height: calc(100% - 10px);
   font-size: small;
   display: flex;

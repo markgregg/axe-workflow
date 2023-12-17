@@ -1,7 +1,7 @@
 .clientInterestsMain {
   display: flex;
   flex-direction: column;
-  height: 360px;
+  height: calc(100% - 20px);
   position: relative;
 }
 
@@ -30,4 +30,10 @@
 .mainMultiselectInterests {
   flex-grow: 1;
   padding: 5px;
+}
+
+.clientInterestsButtons {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 4px;
 }

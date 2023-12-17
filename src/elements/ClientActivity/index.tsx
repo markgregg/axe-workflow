@@ -36,7 +36,7 @@ const ClientActivity: React.FC = () => {
   }, [client])
 
   return (
-    <div className='mainBlotter'>
+    <div className='mainClientBlotter'>
       <div
         className="ag-theme-alpine agGrid"
         style={getAgGridStyle(theme)}

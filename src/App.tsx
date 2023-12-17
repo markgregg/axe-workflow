@@ -12,12 +12,12 @@ import ClientProfile from './elements/ClientProfile'
 import ClientActivity from './elements/ClientActivity'
 import ClientHoldings from './elements/ClientHoldings'
 import ClientInterests from './elements/ClientInterests'
-
-
+import { Matcher } from 'multi-source-select'
 
 
 const App = () => {
   const [persepective, setPerspective] = React.useState<'Product' | 'Client'>('Product')
+  const [interest, setInterest] = React.useState<Matcher[] | null>(null)
 
   return (
     <>
@@ -34,7 +34,12 @@ const App = () => {
                   <label className='mainTesTitle'>TES -</label>
                   <div className='mainCommandBarDiv'>
                     <div style={{ flexGrow: 1 }}>
-                      <CommandBar onClientChanged={() => setPerspective('Client')} />
+                      <CommandBar onClientChanged={matchers => {
+                        setPerspective('Client')
+                        if (matchers) {
+                          setInterest(matchers)
+                        }
+                      }} />
                     </div>
                   </div>
                   <div
@@ -97,7 +102,7 @@ const App = () => {
                   <div className='mainContentRight'>
                     <div className='mainContentClientInterests'>
                       <Window title='Interests'>
-                        <ClientInterests />
+                        <ClientInterests enterInterest={interest} />
                       </Window>
                     </div>
                     <div className='mainContentClientHoldings'>

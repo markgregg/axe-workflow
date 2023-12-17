@@ -6,8 +6,6 @@ import Highcharts, { Options } from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import ToggleButton from '../ToggleButton'
 
-type ChartType = 'BuySell' | 'Volume' | 'HitRatio'
-
 const ClientProfile = () => {
   const volumeDivRef = React.useRef<HTMLDivElement | null>(null)
   const buysellDivRef = React.useRef<HTMLDivElement | null>(null)
