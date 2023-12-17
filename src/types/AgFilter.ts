@@ -2,6 +2,7 @@ import { Matcher } from 'multi-source-select'
 import Bond from './Bond'
 import { CellClassParams, CellStyle, CellStyleFunc, ValueFormatterParams } from 'ag-grid-community'
 import { Insight } from '@/elements/ClientInsight/ClientInsight'
+import Reference from './Reference'
 
 
 export const asHypen = (params: ValueFormatterParams<any, any>) => {
@@ -11,7 +12,7 @@ export const asHypen = (params: ValueFormatterParams<any, any>) => {
   return params.value
 }
 
-export const buySellStyle: CellStyleFunc<Bond, any> = (params: CellClassParams<Bond, any>): CellStyle => {
+export const buySellStyle: CellStyleFunc<any, any> = (params: CellClassParams<any, any>): CellStyle => {
   return {
     backgroundColor: params.value === '' ? 'white' : params.value === 'BUY' ? 'rgb(6,104,178)' : 'orange',
     color: 'white'
@@ -29,12 +30,23 @@ export const sellStyle: CellStyleFunc<Insight, any> = (params: CellClassParams<I
   }
 }
 
+export const refBuyStyle: CellStyleFunc<Reference, any> = (params: CellClassParams<Reference, any>): CellStyle => {
+  return {
+    backgroundColor: 'rgb(136,226,18)'
+  }
+}
+
+export const refSellStyle: CellStyleFunc<Reference, any> = (params: CellClassParams<Reference, any>): CellStyle => {
+  return {
+    backgroundColor: 'rgb(255,150,154)'
+  }
+}
+
 export const graidentStyle: CellStyleFunc<any, any> = (params: CellClassParams<any, any>): CellStyle => {
   return {
     background: `linear-gradient(90deg, rgba(255,0,0,1) 0%, rgb(125, 255, 125) ${100 - (params.value ?? 0)}%, rgba(0,255,0,1) 100%)`
   }
 }
-
 
 export const bidAskValueStyle: CellStyleFunc<Insight, any> = (params: CellClassParams<Insight, any>): CellStyle => {
   return {
@@ -91,6 +103,8 @@ export const getColumn = (source: string): string => {
       return 'hairCut'
     case 'Issuer2':
       return 'issuer'
+    case "Axes":
+      return "axeType"
   }
   return source.toLowerCase()
 }
@@ -103,6 +117,8 @@ export const getFilterType = (source: string): AgFilterType => {
     case 'Issuer2':
     case 'Side':
     case 'Client':
+    case "Axes":
+    case "Sector":
       return 'text'
     case 'MaturityDate':
     case 'IssueDate':

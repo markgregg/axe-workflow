@@ -7,33 +7,7 @@ import './BondChart.css'
 
 const series: Highcharts.SeriesOptionsType[] = [
   {
-    name: 'Microsoft',
-    type: 'line',
-    data: [
-      -60,
-      -85,
-      -92,
-      -110,
-      -105,
-      -74,
-      -56,
-    ]
-  },
-  {
-    name: 'Google',
-    type: 'line',
-    data: [
-      95,
-      80,
-      66,
-      69,
-      84,
-      87,
-      90
-    ]
-  },
-  {
-    name: 'Apple',
+    name: '',
     type: 'line',
     data: [
       20,
@@ -45,19 +19,6 @@ const series: Highcharts.SeriesOptionsType[] = [
       55
     ]
   },
-  {
-    name: 'Samsung',
-    type: 'line',
-    data: [
-      60,
-      20,
-      -2,
-      23,
-      37,
-      75,
-      85
-    ]
-  }
 ]
 
 
@@ -65,32 +26,31 @@ const BondChart = () => {
   const highchartRef = React.useRef<HighchartsReactRefObject | null>(null)
   const bondDivRef = React.useRef<HTMLDivElement | null>(null)
   const [bond, setBond] = React.useState<string>('XS1586702679')
-  const theme = useAppSelector((state) => state.theme.theme)
-  const [checks, setChecks] = React.useState<string[]>(series.map(e => e.name ?? '').filter(a => a !== ''))
   const [seriesOptions, setSeriesOptions] = React.useState<Highcharts.SeriesOptionsType[]>(series)
   const [chartOptions, setBondChartOptions] = React.useState<Options | null>(null)
 
-  const context = useAppSelector((state) => state.context)
+  const theme = useAppSelector((state) => state.theme.theme)
+  const selectedBond = useAppSelector((state) => state.selectedBond)
 
   React.useEffect(() => {
     setBondChartOptions({
       chart: {
-        type: 'line'
+        type: 'line',
+        height: bondDivRef.current?.clientHeight,
+        width: bondDivRef.current?.clientWidth,
       },
       title: {
-        text: 'Relative value of technologies'
+        text: ''
       },
       xAxis: {
         type: 'datetime',
         categories: ['5Y', '8Y', '9Y', '10Y', '15Y', '20Y', '25Y'],
-        title: {
-          text: 'Maturity'
-        }
       },
       yAxis: {
+        enabled: false,
         title: {
-          text: 'Change of Z-Spread'
-        },
+          text: 'Z-spread chg'
+        }
       },
       plotOptions: {
         series: {
@@ -102,22 +62,48 @@ const BondChart = () => {
           }
         }
       },
-
+      legend: {
+        enabled: false
+      },
       series: seriesOptions
     })
   }, [seriesOptions])
 
   React.useEffect(() => {
-    const isin = context.matchers.find(m => m.source === 'ISIN')
-    if (isin) {
-      setBond(isin.text)
+    if (selectedBond.bond) {
+      setBond(selectedBond.bond.isin)
+
+      const point1 = Math.floor(Math.random() * 20) + 5
+      const point2 = Math.floor(Math.random() * point1)
+      const point3 = Math.floor(Math.random() * point2) - 10
+      const point4 = Math.floor(Math.random() * point3) - 10
+      const point5 = Math.floor(Math.random() * point1)
+      const point6 = Math.floor(Math.random() * 20) + point1
+      const point7 = Math.floor(Math.random() * 20) + point6
+
+      setSeriesOptions([
+        {
+          name: '',
+          type: 'line',
+          data: [
+            point1,
+            point2,
+            point3,
+            point4,
+            point5,
+            point6,
+            point7
+          ]
+        },
+      ])
     }
-  }, [context.matchers])
+  }, [selectedBond.bond])
 
   React.useEffect(() => {
     if (highchartRef.current?.chart) {
+      const point = Math.floor(Math.random() * highchartRef.current.chart.series[0].points.length)
       highchartRef.current.chart.series[0].points.forEach(p => {
-        if (p.x === 3) {
+        if (p.x === point) {
           p.update({
             color: 'red',
             marker: {
@@ -126,42 +112,25 @@ const BondChart = () => {
             },
             label: bond
           });
+        } else {
+          p.update({
+            color: '#2caffe',
+            marker: {
+            }
+          })
         }
       });
     }
-  }, [context.matchers, bond])
+  }, [bond])
 
   return (
     <div
       className='bondChartMain'
       style={styleDivFromTheme(theme)}
     >
-      <div className='bondChartTop' >
-        <h2 className='bondChartTitle'>{bond} - 10Y - 2.921%</h2>
-        <div className='bondChartIssuers'>
-          <div className='bondChartIssuerTitle'>Issuers</div>
-          {
-            series.map(item => item.name
-              ? <div className='bondChartIssuer' key={item.name}>
-                <input type='checkbox' checked={checks.includes(item.name)} onChange={e => {
-                  if (item.name && item.name !== 'Microsoft') {
-                    const newChecks = e.currentTarget.checked
-                      ? [...checks, item.name]
-                      : checks.filter(c => c !== item.name)
-                    setChecks(newChecks)
-                    setSeriesOptions([...series.filter(s => s.name && newChecks.includes(s.name))])
-                  }
-                }} />
-                {item.name}
-              </div>
-              : <></>
-            )
-          }
-        </div>
-      </div>
       <div
         ref={bondDivRef}
-        className='bondChartBottom'
+        className='bondChart'
       >
         <HighchartsReact
           ref={highchartRef}
@@ -169,7 +138,6 @@ const BondChart = () => {
           options={chartOptions}
         />
       </div>
-      <div className='bondText'>Could be a message to Bloomberg</div>
     </div>
   )
 }

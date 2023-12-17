@@ -8,6 +8,7 @@
   display: flex;
   border: 1px solid darkgray;
   font-size: x-small;
+  user-select: none;
 }
 
 .buttonMain:hover {

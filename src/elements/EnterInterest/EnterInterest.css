@@ -1,0 +1,29 @@
+.interestMain {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  padding-left: 5px;
+  font-size: x-small;
+}
+
+.interestMain input {
+  font-size: x-small;
+}
+
+.interestLabel {
+  width: 120px;
+}
+
+.interestLabelShort {
+  width: 10px;
+}
+
+.interestGroup {
+  display: flex;
+  flex-direction: row;
+  column-gap: 4px;
+}
+
+.interestMain input {
+  width: 120px;
+}

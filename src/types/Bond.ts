@@ -1,10 +1,11 @@
 
 export default interface Bond {
+  axeType?: 'New' | 'Pref' | 'Axe'
   isin: string
-  axed: boolean
+  esg?: 'Green' | 'Eco' | 'Sustainable'
   side?: 'BUY' | 'SELL'
-  rv: number
   currency: string
+  zSpread: number
   ticker: string
   sector: string
   issueDate: string
@@ -15,3 +16,4 @@ export default interface Bond {
   issuer: string
   hairCut: number
 }
+

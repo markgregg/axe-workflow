@@ -14,7 +14,7 @@ const Button: React.FC<ButtonProps> = ({ Icon, text, onClick }) => {
       onClick={onClick}
       className='buttonMain'
     >
-      {Icon && <Icon />}
+      {Icon && <Icon className='buttonIcon' />}
       {text}
     </div>
   )

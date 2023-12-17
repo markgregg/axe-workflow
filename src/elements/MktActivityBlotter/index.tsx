@@ -4,39 +4,36 @@ import { AgGridReact } from "ag-grid-react"
 import { ColDef } from 'ag-grid-community'
 import { buySellStyle } from '../../types/AgFilter'
 import { useAppSelector } from '../../hooks/redux'
-import './ActivityBlotter.css'
+import './MktActivityBlotter.css'
 import "ag-grid-community/styles/ag-grid.css"
 import "ag-grid-community/styles/ag-theme-alpine.css"
-import SelectedBond from '@/types/SelectedBond'
-import InternalActivity from '@/types/InternalActivity'
-import { internalActivityList } from './InternalActivity'
+import SelectedBond from '../../types/SelectedBond'
+import MarketActivity from '../../types/MarketActivity'
+import { marketActivityList } from './MarketActivity'
 import ToggleButton from '../ToggleButton'
 import { MdBubbleChart } from "react-icons/md";
 import { MdGridView } from "react-icons/md";
 import HighchartsReact from 'highcharts-react-official'
 import Highcharts, { Options } from 'highcharts'
 
-const ActivityBlotter: React.FC = () => {
-  const agGridRef = React.useRef<AgGridReact<InternalActivity> | null>(null)
-  const [rowData, setRowData] = React.useState<InternalActivity[]>()
-  const [columnDefs] = React.useState<ColDef<InternalActivity>[]>([
-    { field: "date", filter: 'agDateColumnFilter', sortable: true, resizable: true, width: 90 },
+const MktActivityBlotter: React.FC = () => {
+  const agGridRef = React.useRef<AgGridReact<MarketActivity> | null>(null)
+  const [rowData, setRowData] = React.useState<MarketActivity[]>()
+  const [columnDefs] = React.useState<ColDef<MarketActivity>[]>([
+    { field: "date", filter: 'agDateColumnFilter', sortable: true, resizable: true, width: 110 },
     { field: "isin", filter: 'agTextColumnFilter', sortable: true, resizable: true, width: 110 },
-    { field: "status", filter: 'agTextColumnFilter', sortable: true, resizable: true, width: 100 },
     { field: "side", filter: 'agTextColumnFilter', sortable: true, resizable: true, width: 80, cellStyle: buySellStyle },
-    { field: "isin", filter: 'agTextColumnFilter', sortable: true, resizable: true, width: 110 },
-    { field: "customerFirmName", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 80 },
-    { field: "price", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 110 },
-    { field: "yield", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 110 },
-    { field: "spread", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 110 },
-    { field: "salesperson", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 80 },
-    { field: "platform", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 80 },
-    { field: "trader", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 80 },
-    { field: "customerName", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 80 },
+    { field: "sizeDelta", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 80 },
+    { field: "highPrice", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 80 },
+    { field: "lowPrice", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 80 },
+    { field: "lastPrice", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 80 },
+    { field: "vwas", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 80 },
+    { field: "highSpread", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 80 },
+    { field: "lowSpread", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 80 },
   ])
   const [showBChart, setShowBChart] = React.useState<boolean>(false)
-  const [period, setPeriod] = React.useState<'1 Month' | '3 Months' | '6 Months' | '1 Year'>('1 Month')
-  const [chartType, setChartType] = React.useState<'Spread' | 'Volume'>('Spread')
+  const [period, setPeriod] = React.useState<'Today' | '7 Days' | 'Month' | 'Year'>('Today')
+  const [chartType, setChartType] = React.useState<'Spread' | 'Volume'>('Volume')
   const [options, setOptions] = React.useState<Options | null>(null)
   const bondDivRef = React.useRef<HTMLDivElement | null>(null)
 
@@ -77,23 +74,24 @@ const ActivityBlotter: React.FC = () => {
     }
 
     agGridRef.current?.api?.onFilterChanged()
-  }, [columnDefs])
+  }, [])
 
   React.useEffect(() => {
     bondChanged(bond.bond)
   }, [bond.bond, bondChanged])
 
   React.useEffect(() => {
-    setRowData(internalActivityList)
+    setRowData(marketActivityList)
   }, [])
 
+
   React.useEffect(() => {
-    const xAxis: string[] = period === '1 Month'
-      ? ['Week 1', 'Week 2', 'Week 3', 'Week 4']
-      : period === '3 Months'
-        ? ['Month - 2', 'Month -1', 'Current Month']
-        : period === '6 Months'
-          ? ['Month - 5', 'Month - 4', 'Month - 3', 'Month - 2', 'Month -1', 'Current Month']
+    const xAxis: string[] = period === 'Today'
+      ? ['9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm']
+      : period === '7 Days'
+        ? ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+        : period === 'Month'
+          ? ['Week 1', 'Week 2', 'Week 3', 'Week 4']
           : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Sweptember', 'October', 'November', 'December']
 
     if (chartType === 'Spread') {
@@ -196,17 +194,16 @@ const ActivityBlotter: React.FC = () => {
 
   }, [chartType, period, showBChart, bond])
 
-
   return (
-    <div className='mainBlotter'>
-      <div className='internalActivitiyViews'>
+    <div className='marketActivityMain'>
+      <div className='marketActivitiyViews'>
         <ToggleButton IconOn={MdBubbleChart} IconOff={MdGridView} onChecked={setShowBChart} checked={showBChart} />
         <div className='clientInterestToggleGroup'>
           <div className='clientInterestSmallText'>Show</div>
-          <ToggleButton textOff='1 Month' textOn='1 Month' onChecked={() => setPeriod('1 Month')} checked={period === '1 Month'} />
-          <ToggleButton textOff='3 Months' textOn='3 Months' onChecked={() => setPeriod('3 Months')} checked={period === '3 Months'} />
-          <ToggleButton textOff='6 Months' textOn='6 Months' onChecked={() => setPeriod('6 Months')} checked={period === '6 Months'} />
-          <ToggleButton textOff='1 Year' textOn='1 Year' onChecked={() => setPeriod('1 Year')} checked={period === '1 Year'} />
+          <ToggleButton textOff='Today' textOn='Today' onChecked={() => setPeriod('Today')} checked={period === 'Today'} />
+          <ToggleButton textOff='7 Days' textOn='7 Days' onChecked={() => setPeriod('7 Days')} checked={period === '7 Days'} />
+          <ToggleButton textOff='Month' textOn='Month' onChecked={() => setPeriod('Month')} checked={period === 'Month'} />
+          <ToggleButton textOff='Year' textOn='Year' onChecked={() => setPeriod('Year')} checked={period === 'Year'} />
         </div>
         {
           showBChart &&
@@ -219,8 +216,8 @@ const ActivityBlotter: React.FC = () => {
       </div>
       {
         showBChart
-          ? <div ref={bondDivRef} className='internalActivityChartContainer'>
-            <div className='internalActivitiyChart'>
+          ? <div ref={bondDivRef} className='marketActivityChartContainer'>
+            <div className='marketActivitiyChart'>
               <HighchartsReact
                 highcharts={Highcharts}
                 constructorType={"chart"}
@@ -239,8 +236,10 @@ const ActivityBlotter: React.FC = () => {
             </AgGridReact>
           </div>
       }
+
     </div>
+
   )
 }
 
-export default ActivityBlotter
+export default MktActivityBlotter

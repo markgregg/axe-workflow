@@ -1,0 +1,33 @@
+.clientInterestsMain {
+  display: flex;
+  flex-direction: column;
+  height: 360px;
+  position: relative;
+}
+
+.agInterestsGrid {
+  max-height: 360px;
+  flex-grow: 1;
+}
+
+.ag-theme-alpine {
+  --ag-grid-size: 3px;
+  --ag-list-item-height: 20px;
+}
+
+.clientInterestFloating {
+  position: absolute;
+  top: 300px;
+  left: 20px;
+  font-size: x-large;
+  color: green;
+}
+
+.clientInterestFloating:hover {
+  color: rgb(24, 170, 24);
+}
+
+.mainMultiselectInterests {
+  flex-grow: 1;
+  padding: 5px;
+}

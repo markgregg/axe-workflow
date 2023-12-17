@@ -16,20 +16,16 @@ import HighchartsReact from 'highcharts-react-official'
 import { LuClock } from "react-icons/lu";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import './ClientInsight.css'
+import SelectedBond from '../../types/SelectedBond'
 
 HC_more(Highcharts);
-
-interface IsinSide {
-  isin: string
-  side: 'BUY' | 'SELL'
-}
 
 const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
 
 const ClientInsight = () => {
   const agGridRef = React.useRef<AgGridReact<Insight> | null>(null)
   const [insights, setInsights] = React.useState<Insight[]>([])
-  const [selected, setSeelcted] = React.useState<IsinSide | null>(null)
+  const [selected, setSeelcted] = React.useState<SelectedBond | null>(null)
   const [options, setOptions] = React.useState<Options | null>(null)
   const theme = useAppSelector((state) => state.theme.theme)
   const [showBChart, setShowBChart] = React.useState<boolean>(false)
@@ -50,15 +46,12 @@ const ClientInsight = () => {
     { field: "interestCaptureDate", headerName: 'Interest Date', filter: 'agDateColumnFilter', sortable: true, resizable: true, width: 100, valueFormatter: asHypen },
   ])
 
-  const context = useAppSelector((state) => state.context)
+  const bond = useAppSelector((state) => state.selectedBond)
 
   React.useEffect(() => {
-    const isin = context.matchers.find(m => m.source.toLowerCase() === 'isin')?.value as string
-    const side = context.matchers.find(m => m.source.toLowerCase() === 'side')?.value as ('BUY' | 'SELL')
+    setSeelcted(bond.bond)
 
-    setSeelcted((isin && side) ? { isin, side } : null)
-
-  }, [context.matchers])
+  }, [bond.bond])
 
   React.useEffect(() => {
     if (showBChart) {
@@ -84,7 +77,7 @@ const ClientInsight = () => {
     return Math.round(Math.abs((Date.now() - jdata) / oneDay));
   }
 
-  const setGridData = (axe: IsinSide | null, showVolume: boolean, showTop: 'holdings' | 'activity' | 'interests') => {
+  const setGridData = (axe: SelectedBond | null, showVolume: boolean, showTop: 'holdings' | 'activity' | 'interests') => {
     const tmpInsights = clientInsightList
       .filter(item => !axe
         ? showTop === 'activity'
@@ -135,7 +128,7 @@ const ClientInsight = () => {
     setInsights(tmpInsights.sort(sort))
   }
 
-  const setChartData = (axe: IsinSide | null, showVolume: boolean, activity: boolean, holdings: boolean, interests: boolean) => {
+  const setChartData = (axe: SelectedBond | null, showVolume: boolean, activity: boolean, holdings: boolean, interests: boolean) => {
     const activityData: DataItem[] = activity
       ? clientInsightList
         .filter(item => !axe || item.isin === axe.isin && (axe.side === 'BUY' && item.buyDate || axe.side === 'SELL' && item.sellDate))
@@ -325,6 +318,7 @@ const ClientInsight = () => {
             },
             dataLabels: {
               enabled: true,
+              allowOverlap: true,
               format: '{point.name}',
               style: {
                 color: 'black',

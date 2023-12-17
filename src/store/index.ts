@@ -1,11 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 import themeReducer from './themeSlice'
 import contextReducer from './contextSlice'
+import productSlice from './productSlice'
+import ClientSlice from './ClientSlice'
 
 export const store = configureStore({
   reducer: {
     theme: themeReducer,
-    context: contextReducer
+    context: contextReducer,
+    selectedBond: productSlice,
+    selectedClient: ClientSlice
   },
 })
 
