@@ -151,8 +151,8 @@ const ClientProfile = () => {
       <div className='clientProfileHeader'>
         <h2 className='clientProfileTitle'>{client.client}</h2>
         <div className='clientProfileProps'>
-          <div><b>Contact:</b>Mrs Joanna Moore</div>
-          <div><b>Numnber:</b>+44 207 4958181 </div>
+          <div><b>Contact:</b> Mrs Joanna Moore</div>
+          <div><b>Numnber:</b> +44 207 4958181 </div>
         </div>
         <div className='clientProfileToggleGroup'>
           <ToggleButton textOff='Date' textOn='Date' onChecked={() => setBreakdown('Date')} checked={breakdown === 'Date'} />

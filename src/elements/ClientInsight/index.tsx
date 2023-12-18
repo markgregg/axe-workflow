@@ -242,14 +242,14 @@ const ClientInsight = () => {
                     ? 365 - daysFromDate(item.sellDate ?? '')
                     : 365 - daysFromDate(item.postingDate ?? ''),
             explain: showVolume
-              ? `Activity/Holding volume: ${!axe
+              ? `Activity + Holding volume: ${!axe
                 ? (item.buyVolume ?? 0) > (item.sellVolume ?? 0)
                   ? item.buyVolume
                   : item.sellVolume
                 : axe.side === 'BUY'
                   ? item.buyVolume
                   : item.sellVolume}`
-              : `Activity/Holding date: ${!axe
+              : `Activity + Holding date: ${!axe
                 ? (item.buyDate ?? '') > (item.sellDate ?? '')
                   ? (item.buyDate ?? '')
                   : (item.sellDate ?? '')
@@ -267,28 +267,32 @@ const ClientInsight = () => {
       series.push({
         name: 'Activities',
         type: 'packedbubble',
-        data: activityData
+        data: activityData,
+        color: '#4840be'
       })
     }
     if (holdingsData.length > 0) {
       series.push({
         name: 'Holdings',
         type: 'packedbubble',
-        data: holdingsData
+        data: holdingsData,
+        color: '#be4040'
       })
     }
     if (interestData.length > 0) {
       series.push({
         name: 'Interests',
         type: 'packedbubble',
-        data: interestData
+        data: interestData,
+        color: '#4fbe40'
       })
     }
     if (combinedData.length > 0) {
       series.push({
-        name: 'Activities/Holdings',
+        name: 'Activity + Holding',
         type: 'packedbubble',
-        data: combinedData
+        data: combinedData,
+        color: '#8540be'
       })
     }
 

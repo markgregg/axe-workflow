@@ -56,7 +56,7 @@ const App = () => {
                 ? <>
                   <div className='mainContentLeft'>
                     <div className='mainContentBonds'>
-                      <Window title='Credit Blotter'>
+                      <Window title='Product Browser'>
                         <Bonds />
                       </Window>
                     </div>

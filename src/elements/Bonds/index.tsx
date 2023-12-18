@@ -332,15 +332,15 @@ const Bonds = () => {
     matchersChanged(context.matchers)
   }, [context.matchers, matchersChanged])
 
-  const getRowStyle = (params: RowClassParams<Bond>) => {
+  /*const getRowStyle = (params: RowClassParams<Bond>) => {
     if (params.data?.axeType === 'Axe') {
-      return { backgroundColor: 'rgb(255, 228, 178)' }
+      return { backgroundColor: '#CDD760' }
     } else if (params.data?.axeType === 'New') {
-      return { backgroundColor: 'rgb(255, 255, 163)' }
+      return { backgroundColor: '#E6EBB0' }
     } else if (params.data?.axeType === 'Pref') {
-      return { backgroundColor: 'rgb(181, 181, 248)' }
+      return { backgroundColor: '#6FB6DF' }
     }
-  };
+  };*/
 
   return (
     <div className='mainBlotter'>
@@ -371,7 +371,6 @@ const Bonds = () => {
           rowSelection='single'
           rowMultiSelectWithClick={true}
           onRowClicked={handleSelection}
-          getRowStyle={getRowStyle}
           columnDefs={columnDefs}>
         </AgGridReact>
       </div>

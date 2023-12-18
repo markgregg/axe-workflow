@@ -7,9 +7,9 @@ import Bond from "./Bond";
 export const AxeRender = (params: ICellRendererParams<Bond>) => {
   return (
     params.data?.axeType === 'Axe'
-      ? <div style={{ color: 'orange' }}><GiFireAxe /></div>
+      ? <div style={{ color: '#BD000C' }}><GiFireAxe /></div>
       : params.data?.axeType === 'New'
-        ? <div style={{ color: 'gold' }}><FaStar /></div>
+        ? <div style={{ color: '#ff8400' }}><FaStar /></div>
         : params.data?.axeType === 'Pref'
           ? <div style={{ color: 'blue' }}><FaRegThumbsUp /></div>
           : <div />
