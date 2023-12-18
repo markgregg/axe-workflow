@@ -14,11 +14,11 @@ const ClientHoldings = () => {
   const theme = useAppSelector((state) => state.theme.theme)
   const [columnDefs] = React.useState<ColDef<ClientHolding>[]>([
     { field: "isin", filter: 'agTextColumnFilter', sortable: true, resizable: true, width: 110, },
-    { field: "position", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 70, },
-    { field: "changeValue", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 60, },
-    { field: "change", filter: 'agTextColumnFilter', sortable: true, resizable: true, width: 60 },
-    { field: "postingDate", filter: 'agDateColumnFilter', sortable: true, resizable: true, width: 80 },
-    { field: "changeFromDate", filter: 'agDateColumnFilter', sortable: true, resizable: true, width: 80 }
+    { field: "position", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 90, },
+    { field: "changeValue", headerName: 'Value chg', filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 90, },
+    { field: "change", headerName: 'Value type', filter: 'agTextColumnFilter', sortable: true, resizable: true, width: 110 },
+    { field: "postingDate", filter: 'agDateColumnFilter', sortable: true, resizable: true, width: 110 },
+    { field: "changeFromDate", filter: 'agDateColumnFilter', sortable: true, resizable: true, width: 110 }
   ])
 
 

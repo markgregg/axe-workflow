@@ -181,7 +181,8 @@ const ActivityBlotter: React.FC = () => {
         plotOptions: {
           column: {
             pointPadding: 0.2,
-            borderWidth: 0
+            borderWidth: 0,
+            colorByPoint: true
           }
         },
         series: [

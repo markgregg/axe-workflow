@@ -11,11 +11,12 @@ type WindowProps = {
   children?: React.ReactNode
   title: string
   color?: string
+  titleColor?: string
   onHide?: () => void
 }
 
 const Window: React.FC<WindowProps> = ({
-  children, title, onHide, color
+  children, title, onHide, color, titleColor
 }) => {
   const theme = useAppSelector((state) => state.theme.theme)
 
@@ -31,7 +32,7 @@ const Window: React.FC<WindowProps> = ({
             onClick={onHide}
           />
         }
-        <span style={{ flexGrow: 1 }}>{title}</span>
+        <span style={{ flexGrow: 1, backgroundColor: titleColor, paddingLeft: '10px' }}>{title}</span>
         {
           color &&
           <FaCircle style={{ color, paddingRight: '4px' }} />

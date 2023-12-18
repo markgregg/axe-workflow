@@ -102,7 +102,7 @@ const App = () => {
                   <div className='mainContentRight'>
                     <div className='mainContentClientInterests'>
                       <Window title='Interests'>
-                        <ClientInterests enterInterest={interest} />
+                        <ClientInterests enterInterest={interest} onInterestEntered={() => setInterest(null)} />
                       </Window>
                     </div>
                     <div className='mainContentClientHoldings'>

@@ -14,10 +14,10 @@ const ClientActivity: React.FC = () => {
   const agGridRef = React.useRef<AgGridReact<InternalActivity> | null>(null)
   const [rowData, setRowData] = React.useState<InternalActivity[]>()
   const [columnDefs] = React.useState<ColDef<InternalActivity>[]>([
-    { field: "date", filter: 'agDateColumnFilter', sortable: true, resizable: true, width: 90 },
+    { field: "date", filter: 'agDateColumnFilter', sortable: true, resizable: true, width: 120 },
     { field: "isin", filter: 'agTextColumnFilter', sortable: true, resizable: true, width: 110 },
     { field: "status", filter: 'agTextColumnFilter', sortable: true, resizable: true, width: 100 },
-    { field: "side", filter: 'agTextColumnFilter', sortable: true, resizable: true, width: 80, cellStyle: buySellStyle },
+    { field: "side", filter: 'agTextColumnFilter', sortable: true, resizable: true, width: 60, cellStyle: buySellStyle },
     { field: "isin", filter: 'agTextColumnFilter', sortable: true, resizable: true, width: 110 },
     { field: "price", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 110 },
     { field: "yield", filter: 'agNumberColumnFilter', sortable: true, resizable: true, width: 110 },

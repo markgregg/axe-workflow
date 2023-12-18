@@ -4,7 +4,7 @@ export default interface Interest {
   maturityTo?: string
   couponFrom?: number
   couponTo?: number
-  industry?: string
+  sector?: string
   side?: 'BUY' | 'SELL'
   size?: number
 }

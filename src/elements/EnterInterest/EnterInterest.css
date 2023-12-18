@@ -1,12 +1,20 @@
-.interestMain {
-  display: flex;
-  flex-direction: column;
-  row-gap: 4px;
-  padding-left: 5px;
-  font-size: x-small;
+.enterInterestMain {
+  position: fixed;
+  top: 400px;
+  left: 400px;
+  z-index: 50;
 }
 
-.interestMain input {
+.enterInterestForm {
+  row-gap: 6px;
+  display: flex;
+  flex-direction: column;
+  font-size: x-small;
+  background-color: rgb(238, 238, 238);
+  padding: 20px;
+}
+
+.enterInterestMain input {
   font-size: x-small;
 }
 
@@ -24,6 +32,10 @@
   column-gap: 4px;
 }
 
-.interestMain input {
+.enterInterestMain input {
   width: 120px;
+  border-radius: 4px;
+  margin-right: 4px;
+  margin-left: 4px;
+  padding: 2px;
 }

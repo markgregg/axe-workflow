@@ -104,7 +104,8 @@ const ClientProfile = () => {
       plotOptions: {
         column: {
           pointPadding: 0.2,
-          borderWidth: 0
+          borderWidth: 0,
+          colorByPoint: true
         }
       },
       series: [
@@ -116,7 +117,7 @@ const ClientProfile = () => {
       ],
       legend: {
         enabled: false
-      }
+      },
     })
 
   }, [breakdown, client])
